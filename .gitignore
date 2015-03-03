@@ -1,0 +1,20 @@
+# ignore build
+.gradle
+logs
+build
+
+#ignore intellij
+atlassian-ide-plugin.xml
+.idea/
+*.iml
+*.ipr
+*.iws
+
+#ignore misc
+.ruby-version
+.wgetrc
+contract.zip
+contract
+newrelic/*.jar
+newrelic/logs
+scripts

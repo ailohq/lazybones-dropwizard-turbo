@@ -1,0 +1,30 @@
+jar {
+    manifest {
+        attributes(
+                "Implementation-Title": applicationName,
+                "Implementation-Version": version,
+                "Main-Class": mainClass
+        )
+    }
+}
+
+shadowJar {
+    baseName appBaseName
+    archiveName "${appBaseName}.jar"
+    destinationDir buildDir
+
+    mergeServiceFiles()
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+}
+
+publishing {
+    publications {
+        shadow(MavenPublication) {
+            from components.shadow
+            artifactId = appBaseName
+        }
+    }
+}
+

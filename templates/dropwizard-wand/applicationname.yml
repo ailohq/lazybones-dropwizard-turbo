@@ -1,0 +1,25 @@
+dataSource:
+  driverClass: ${env.HIBERNATE_DRIVER!'org.h2.Driver'}
+  user: ${env.HIBERNATE_USER!'sa'}
+  password: ${env.HIBERNATE_PASSWORD!'sa'}
+  url: ${env.HIBERNATE_URL!'jdbc:h2:./build/h2db'}
+  minSize: 10
+  maxSize: 10
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: ${env.HIBERNATE_DIALECT!'org.hibernate.dialect.H2Dialect'}
+    hibernate.hbm2ddl.auto: create
+
+server:
+  type: simple
+  applicationContextPath: /
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: 8080
+
+logging:
+  level: INFO
+  loggers:
+    com.example.app: DEBUG
+    org.hibernate.SQL: DEBUG

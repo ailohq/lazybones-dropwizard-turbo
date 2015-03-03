@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+    <changeSet author="thomas (generated)" id="1422848211405-1">
+        <createTable tableName="AGENCY">
+            <column name="ABN" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BUSINESSNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="thomas (generated)" id="1422848211405-2">
+        <createTable tableName="PERSONS">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_2"/>
+            </column>
+            <column name="EMAILADDRESS" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIRSTNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LASTNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MOBILENUMBER" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="thomas (manual)" id="1422848211405-3">
+        <createTable tableName="PROPERTIES">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_E"/>
+            </column>
+            <column name="ADDRESSLINE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUBURB" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="POSTCODE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="thomas (generated)" id="1422848211405-4">
+        <addPrimaryKey columnNames="ABN" constraintName="CONSTRAINT_7" tableName="AGENCY"/>
+    </changeSet>
+    <changeSet author="thomas (generated)" id="1422848211405-5">
+        <addUniqueConstraint columnNames="FIRSTNAME,LASTNAME,EMAILADDRESS" constraintName="UK_8T1EME1DG86HG95MRK3CBDO4E"
+                             deferrable="false" disabled="false" initiallyDeferred="false" tableName="PERSONS"/>
+    </changeSet>
+    <changeSet author="thomas (manual)" id="1422848211405-6">
+        <addUniqueConstraint columnNames="ADDRESSLINE,SUBURB,STATE,POSTCODE" constraintName="UC_PROPERTY_ADDRESS"
+                             deferrable="false" disabled="false" initiallyDeferred="false" tableName="PROPERTIES"/>
+    </changeSet>
+</databaseChangeLog>

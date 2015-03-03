@@ -1,0 +1,53 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.wiredforcode:gradle-spawn-plugin:0.6.0'
+        classpath 'de.undercouch:gradle-download-task:1.2'
+    }
+}
+import com.wiredforcode.gradle.spawn.*
+import de.undercouch.gradle.tasks.download.*
+
+task downloadContract(type: Download) {
+    src 'http://www.example.com/pact/contracts.zip'
+    username bintrayUser
+    password bintrayApiKey
+    dest "${buildDir}/contract/contracts.zip"
+}
+
+task downloadAndUnzipContract(dependsOn: downloadContract, type: Copy) {
+    from zipTree(downloadContract.dest)
+    into "${buildDir}/contract/"
+}
+
+task startServer(type: SpawnProcessTask, dependsOn: ['assemble', 'shadowJar', 'downloadContract']) {
+    command "java -jar ${projectDir}/build/${appBaseName}.jar server ${config}"
+    ready 'Started Platmasphere'
+}
+
+task stopServer(type: KillProcessTask)
+
+pact {
+    serviceProviders {
+        // You can define as many as you need, but each must have a unique name
+        apiProvider {
+            startProviderTask = startServer
+            terminateProviderTask = stopServer
+            protocol = 'http'
+            host = 'localhost'
+            port = 8080
+            path = '/'
+
+            // Again, you can define as many consumers for each provider as you need, but each must have a unique name
+            hasPactWith('platform-client') {
+                // currently supports a file path using file() or a URL using url()
+                pactFile = file('build/contract/api.json')
+                stateChange = 'http://localhost:8080/pact/state'
+            }
+        }
+
+    }
+
+}
