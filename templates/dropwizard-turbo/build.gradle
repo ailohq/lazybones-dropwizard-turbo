@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '1.2.1'
+    id 'au.com.dius.pact' version '2.1.8'
+    id 'maven-publish'
+    id "com.jfrog.bintray" version '1.0'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+version = project.hasProperty('app_version') ? app_version : 'local'
+project.ext {
+    schema = project.hasProperty('db_schema') ? db_schema : 'public'
+}
+
+repositories {
+    jcenter()
+    mavenLocal()
+}
+
+dependencies {
+    compile "io.dropwizard:dropwizard-core:${dropwizardVersion}"
+    compile "io.dropwizard:dropwizard-auth:${dropwizardVersion}"
+    compile "io.dropwizard:dropwizard-client:${dropwizardVersion}"
+    compile "io.dropwizard:dropwizard-hibernate:${dropwizardVersion}"
+    compile "io.dropwizard:dropwizard-migrations:${dropwizardVersion}"
+
+    compile "de.thomaskrille:dropwizard-template-config:${templateConfigVersion}"
+    compile "com.hubspot.dropwizard:dropwizard-guice:${dropwizardGuiceVersion}"
+    compile("com.netflix.governator:governator:${governatorVersion}") {
+        exclude group: 'com.google.guava', module: 'guava'
+        exclude group: 'commons-lang'
+    }
+
+    compile "com.h2database:h2:${h2Version}"
+    compile "com.newrelic.agent.java:newrelic-api:${newrelicVersion}"
+    compile("com.wordnik:swagger-jersey2-jaxrs_2.11:${swaggerVersion}") {
+        exclude group: 'org.glassfish.jersey.containers', module: 'jersey-container-servlet-core'
+        exclude group: 'org.glassfish.jersey.core', module: 'jersey-server'
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+
+    testCompile "io.dropwizard:dropwizard-testing:${dropwizardVersion}"
+}
+
+task run << {
+    javaexec {
+        main = "-jar"
+        args = ["${buildDir}/${appBaseName}.jar", 'server', config ]
+    }
+}
+
+apply from: 'gradle/pact.gradle'
+apply from: 'gradle/shadow.gradle'
+apply from: 'gradle/migrations.gradle'
+apply from: 'gradle/bintray.gradle'

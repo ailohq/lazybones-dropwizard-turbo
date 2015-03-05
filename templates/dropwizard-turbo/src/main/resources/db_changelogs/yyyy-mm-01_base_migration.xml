@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+    <changeSet author="user (generated)" id="1422848211405-2">
+        <createTable tableName="PERSONS">
+            <column autoIncrement="true" name="ID" type="INT(10)">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_2"/>
+            </column>
+            <column name="EMAILADDRESS" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIRSTNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LASTNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MOBILENUMBER" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

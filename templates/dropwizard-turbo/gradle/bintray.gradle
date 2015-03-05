@@ -1,0 +1,29 @@
+task bintrayDelete << {
+    def deleteUrl = ['curl', '-u',
+                     bintrayUser + ':' + bintrayApiKey,
+                     '-X',
+                     'DELETE',
+                     "https://api.bintray.com/packages/CHANGE_ME/versions/${version}/"].execute()
+    println("delete: " + deleteUrl.text)
+}
+
+bintray {
+    user = bintrayUser
+    key = bintrayApiKey
+
+    publications = ['shadow']
+
+    dryRun = false //Whether to run this as dry-run, without deploying
+    publish = true //If version should be auto published after an upload
+    pkg {
+        repo = 'CHANGE_ME'
+        userOrg = group
+        name = appBaseName
+        desc = 'CHANGE_ME'
+        websiteUrl = 'CHANGE_ME'
+        issueTrackerUrl = 'CHANGE_ME'
+        vcsUrl = 'CHANGE_ME'
+        licenses = ['Apache-2.0']
+        publicDownloadNumbers = true
+    }
+}
