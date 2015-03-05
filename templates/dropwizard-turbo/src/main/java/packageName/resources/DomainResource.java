@@ -1,5 +1,7 @@
 package ${packageName}.resources;
 
+import javax.ws.rs.Consumes;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import com.codahale.metrics.annotation.Timed;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.jersey.caching.CacheControl;
@@ -29,7 +31,8 @@ public class ${domainName}Resource {
     @POST
     @Timed
     @UnitOfWork
-    public void createWand(@Valid ${domainName} ${domainSnakeName}) {
+    @Consumes(APPLICATION_JSON)
+    public void create${domainName}(@Valid ${domainName} ${domainSnakeName}) {
         ${domainSnakeName}DAO.create(${domainSnakeName});
     }
 
@@ -37,17 +40,17 @@ public class ${domainName}Resource {
     @Timed
     @UnitOfWork
     @CacheControl(maxAge = 1, maxAgeUnit = TimeUnit.DAYS)
-    public List<${domainName}> getAll() {
+    public List<${domainName}> getAll${domainName}() {
         return ${domainSnakeName}DAO.readAll();
     }
 
     @GET
-    @Path("{name}")
+    @Path("{id}")
     @Timed
     @UnitOfWork
     @CacheControl(maxAge = 1, maxAgeUnit = TimeUnit.DAYS)
-    public Optional<${domainName}> getByName(@PathParam("name") final String name ) {
-        return ${domainSnakeName}DAO.readByName(name);
+    public Optional<${domainName}> get${domainName}ById(@PathParam("id") final Integer id ) {
+        return ${domainSnakeName}DAO.readById(id);
     }
 
 }

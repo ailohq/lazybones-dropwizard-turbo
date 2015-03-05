@@ -19,7 +19,7 @@ public abstract class IntegrationTest extends JsonFixtureTest {
 
     @ClassRule
     public static final DropwizardAppRule<${applicationName}Configuration> RULE =
-            new DropwizardAppRule<>(${applicationName}.class, resourceFilePath("applicationname-test.yml"));
+            new DropwizardAppRule<>(${applicationName}.class, resourceFilePath("${applicationDashName}-test.yml"));
 
     protected static Client client;
 

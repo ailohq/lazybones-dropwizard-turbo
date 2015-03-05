@@ -23,7 +23,7 @@ public class ${domainName}DAO extends AbstractDAO<${domainName}> {
         return list(currentSession().createCriteria(${domainName}.class));
     }
 
-    public Optional<${domainName}> readByName(String name) {
-        return Optional.fromNullable(get(name));
+    public Optional<${domainName}> readById(Integer id) {
+        return Optional.fromNullable(get(id));
     }
 }

@@ -13,10 +13,10 @@ public class ${domainName} {
 
     @Id
     @JsonProperty
-    private String name;
+    private Integer id;
 
     @Column
     @JsonProperty
-    private String master;
+    private String message;
 
 }

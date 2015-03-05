@@ -13,13 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ${domainName}IntegrationTest extends IntegrationTest {
 
     @Test
-    public void createLazybone () {
+    public void create${domainName} () {
         // given
         ${domainName} ${domainSnakeName} = readFromJson("fixtures/${domainSnakeName}.json", ${domainName}.class);
 
         // when
         Response response = client.target(
-                String.format("http://localhost:%d/${domainName}", RULE.getLocalPort()))
+                String.format("http://localhost:%d/${domainLowercaseName}/", RULE.getLocalPort()))
                 .request()
                 .post(Entity.json(${domainSnakeName}), Response.class);
 

@@ -19,42 +19,6 @@ processTemplates "src/test/java/packageName/**/*.java", props
 def packageDirectoryStructure = props.packageName.replace('.', '/')
 
 String targetDir = projectDir.path
-def existingDirectory = new File("${targetDir}/src/main/java/packageName")
-
-// Java classes
-def dbFile = new File("${targetDir}/src/main/java/packageName/db/DomainDAO.java")
-FileUtils.moveFile(dbFile, new File("${targetDir}/src/main/java/${packageDirectoryStructure}/db/${props.domainName}DAO.java"))
-
-def healthCheckFile = new File("${targetDir}/src/main/java/packageName/health/DomainHealthCheck.java")
-FileUtils.moveFile(healthCheckFile, new File("${targetDir}/src/main/java/${packageDirectoryStructure}/health/${props.domainName}HealthCheck.java"))
-
-def modelFile = new File("${targetDir}/src/main/java/packageName/model/Domain.java")
-FileUtils.moveFile(modelFile, new File("${targetDir}/src/main/java/${packageDirectoryStructure}/model/${props.domainName}.java"))
-
-def resourceFile = new File("${targetDir}/src/main/java/packageName/resources/DomainResource.java")
-FileUtils.moveFile(resourceFile, new File("${targetDir}/src/main/java/${packageDirectoryStructure}/resources/${props.domainName}Resource.java"))
-
-def moduleFile = new File("${targetDir}/src/main/java/packageName/ApplicationModule.java")
-FileUtils.moveFile(moduleFile, new File("${targetDir}/src/main/java/${packageDirectoryStructure}/${props.applicationName}Module.java"))
-
-def appFile = new File("${targetDir}/src/main/java/packageName/Application.java")
-FileUtils.moveFile(appFile, new File("${targetDir}/src/main/java/${packageDirectoryStructure}/${props.applicationName}.java"))
-
-def configurationFile = new File("${targetDir}/src/main/java/packageName/ApplicationConfiguration.java")
-FileUtils.moveFile(configurationFile, new File("${targetDir}/src/main/java/${packageDirectoryStructure}/${props.applicationName}Configuration.java"))
-
-// Test Classes
-def resourceTestFile = new File("${targetDir}/src/test/java/packageName/resources/DomainResourceTest.java")
-FileUtils.moveFile(resourceTestFile, new File("${targetDir}/src/test/java/${packageDirectoryStructure}/resources/${props.domainName}ResourceTest.java"))
-
-def integrationTestFile = new File("${targetDir}/src/test/java/packageName/resources/DomainIntegrationTest.java")
-FileUtils.moveFile(integrationTestFile, new File("${targetDir}/src/test/java/${packageDirectoryStructure}/resources/${props.domainName}IntegrationTest.java"))
-
-def jsonFixtureTestFile = new File("${targetDir}/src/test/java/packageName/JsonFixtureTest.java")
-FileUtils.moveFile(jsonFixtureTestFile, new File("${targetDir}/src/test/java/${packageDirectoryStructure}/JsonFixtureTest.java"))
-
-def absIntegrationTestFile = new File("${targetDir}/src/test/java/packageName/IntegrationTest.java")
-FileUtils.moveFile(absIntegrationTestFile, new File("${targetDir}/src/test/java/${packageDirectoryStructure}/IntegrationTest.java"))
 
 // Config YAML
 def configYaml = new File("${targetDir}/application.yml")
@@ -63,4 +27,52 @@ FileUtils.moveFile(configYaml, new File("${targetDir}/${props.applicationDashNam
 def configTestYaml = new File("${targetDir}/src/test/resources/application-test.yml")
 FileUtils.moveFile(configTestYaml, new File("${targetDir}/src/test/resources/${props.applicationDashName}-test.yml"))
 
-FileUtils.deleteDirectory(existingDirectory)
+def fixtureFile = new File("${targetDir}/src/test/resources/fixtures/domain.json")
+FileUtils.moveFile(fixtureFile, new File("${targetDir}/src/test/resources/fixtures/${props.domainSnakeName}.json"))
+
+// Java classes
+def existingSrcDirectory = "${targetDir}/src/main/java/packageName"
+def targetSrcDirectory = "${targetDir}/src/main/java/${packageDirectoryStructure}"
+
+def dbFile = new File("${existingSrcDirectory}/db/DomainDAO.java")
+FileUtils.moveFile(dbFile, new File("${targetSrcDirectory}/db/${props.domainName}DAO.java"))
+
+def healthCheckFile = new File("${existingSrcDirectory}/health/DomainHealthCheck.java")
+FileUtils.moveFile(healthCheckFile, new File("${targetSrcDirectory}/health/${props.domainName}HealthCheck.java"))
+
+def modelFile = new File("${existingSrcDirectory}/model/Domain.java")
+FileUtils.moveFile(modelFile, new File("${targetSrcDirectory}/model/${props.domainName}.java"))
+
+def resourceFile = new File("${existingSrcDirectory}/resources/DomainResource.java")
+FileUtils.moveFile(resourceFile, new File("${targetSrcDirectory}/resources/${props.domainName}Resource.java"))
+
+def moduleFile = new File("${existingSrcDirectory}/ApplicationModule.java")
+FileUtils.moveFile(moduleFile, new File("${targetSrcDirectory}/${props.applicationName}Module.java"))
+
+def appFile = new File("${existingSrcDirectory}/Application.java")
+FileUtils.moveFile(appFile, new File("${targetSrcDirectory}/${props.applicationName}.java"))
+
+def configurationFile = new File("${existingSrcDirectory}/ApplicationConfiguration.java")
+FileUtils.moveFile(configurationFile, new File("${targetSrcDirectory}/${props.applicationName}Configuration.java"))
+
+FileUtils.deleteDirectory(new File(existingSrcDirectory))
+
+// Test Classes
+def existingTestDirectory = "${targetDir}/src/test/java/packageName"
+def targetTestDirectory = "${targetDir}/src/test/java/${packageDirectoryStructure}"
+
+def resourceTestFile = new File("${existingTestDirectory}/resources/DomainResourceTest.java")
+FileUtils.moveFile(resourceTestFile, new File("${targetTestDirectory}/resources/${props.domainName}ResourceTest.java"))
+
+def integrationTestFile = new File("${existingTestDirectory}/resources/DomainIntegrationTest.java")
+FileUtils.moveFile(integrationTestFile, new File("${targetTestDirectory}/resources/${props.domainName}IntegrationTest.java"))
+
+def jsonFixtureTestFile = new File("${existingTestDirectory}/JsonFixtureTest.java")
+FileUtils.moveFile(jsonFixtureTestFile, new File("${targetTestDirectory}/JsonFixtureTest.java"))
+
+def absIntegrationTestFile = new File("${existingTestDirectory}/IntegrationTest.java")
+FileUtils.moveFile(absIntegrationTestFile, new File("${targetTestDirectory}/IntegrationTest.java"))
+
+FileUtils.deleteDirectory(new File(existingTestDirectory))
+
+
