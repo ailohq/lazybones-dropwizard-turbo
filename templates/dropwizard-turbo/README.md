@@ -16,6 +16,7 @@ If you are not already familiar with Dropwizard, check out [Getting Started](htt
             |   |     +- your.package.structure
             |   |           +- db
             |   |           +- health
+            |   |           +- jersey
             |   |           +- model
             |   |           +- resources
             |   +- resources

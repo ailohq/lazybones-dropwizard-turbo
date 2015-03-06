@@ -22,19 +22,19 @@ task downloadAndUnzipContract(dependsOn: downloadContract, type: Copy) {
     into "${buildDir}/contract/"
 }
 
-task startServer(type: SpawnProcessTask, dependsOn: ['assemble', 'shadowJar', 'downloadContract']) {
+task pactStartServer(type: SpawnProcessTask, dependsOn: ['assemble', 'shadowJar', 'downloadContract']) {
     command "java -jar ${projectDir}/build/${appBaseName}.jar server ${config}"
     ready 'Started Platmasphere'
 }
 
-task stopServer(type: KillProcessTask)
+task pactStopServer(type: KillProcessTask)
 
 pact {
     serviceProviders {
         // You can define as many as you need, but each must have a unique name
         apiProvider {
-            startProviderTask = startServer
-            terminateProviderTask = stopServer
+            startProviderTask = pactStartServer
+            terminateProviderTask = pactStopServer
             protocol = 'http'
             host = 'localhost'
             port = 8080

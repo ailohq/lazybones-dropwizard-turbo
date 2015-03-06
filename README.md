@@ -62,4 +62,6 @@ Most of the following dependencies are optional. Mix and match as you see fit.
  * [Docker](https://www.docker.com/) - Includes sample Dockerfile.
  * [Dropwizard Testing](https://dropwizard.github.io/dropwizard/manual/testing.html) - sample Resource and Integration tests provided
  * [Shadow]() - building exectutable fatjar. See `gradle/shadow.gradle`
+ * CORS Filter - CORS implementation using Jersey `ContainerResponseFilter`
+
 

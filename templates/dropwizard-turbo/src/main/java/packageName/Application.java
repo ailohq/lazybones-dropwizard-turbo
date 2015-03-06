@@ -2,12 +2,14 @@ package ${packageName};
 
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import com.netflix.governator.guice.LifecycleInjector;
+import com.wordnik.swagger.config.ConfigFactory;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.jaxrs.config.DefaultJaxrsScanner;
 import com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider;
 import com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON;
 import com.wordnik.swagger.jaxrs.listing.ResourceListingProvider;
 import com.wordnik.swagger.jaxrs.reader.DefaultJaxrsApiReader;
+import com.wordnik.swagger.model.ApiInfo;
 import com.wordnik.swagger.reader.ClassReaders;
 import de.thomaskrille.dropwizard_template_config.TemplateConfigBundle;
 import io.dropwizard.Application;
@@ -51,6 +53,10 @@ public class ${applicationName} extends Application<${applicationName}Configurat
 
         // Add the reader, which scans the resources and extracts the resource information
         ClassReaders.setReader(new DefaultJaxrsApiReader());
+
+        // Set the swagger config options
+        ApiInfo apiInfo= new ApiInfo(this.getName(), "description of service", null, "contact me", null, null );
+        ConfigFactory.config().setApiInfo(apiInfo);
     }
 
     final MigrationsBundle<${applicationName}Configuration> migrationsBundle =
@@ -74,6 +80,7 @@ public class ${applicationName} extends Application<${applicationName}Configurat
             .enableAutoConfig(
                     "${packageName}.resources",
                     "${packageName}.health",
+                    "${packageName}.jersey",
                     "trunk.dropwizard.newrelic"
             )
             .setConfigClass(${applicationName}Configuration.class)

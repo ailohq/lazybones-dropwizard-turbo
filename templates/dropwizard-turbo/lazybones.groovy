@@ -42,6 +42,10 @@ FileUtils.moveFile(dbFile, new File("${targetSrcDirectory}/db/${props.domainName
 def healthCheckFile = new File("${existingSrcDirectory}/health/DomainHealthCheck.java")
 FileUtils.moveFile(healthCheckFile, new File("${targetSrcDirectory}/health/${props.domainName}HealthCheck.java"))
 
+def corsFilterFile = new File("${existingSrcDirectory}/jersey/CORSFilter.java")
+FileUtils.moveFile(corsFilterFile, new File("${targetSrcDirectory}/jersey/CORSFilter.java"))
+
+
 def modelFile = new File("${existingSrcDirectory}/model/Domain.java")
 FileUtils.moveFile(modelFile, new File("${targetSrcDirectory}/model/${props.domainName}.java"))
 

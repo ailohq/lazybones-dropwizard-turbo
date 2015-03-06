@@ -44,13 +44,6 @@ dependencies {
     testCompile "io.dropwizard:dropwizard-testing:${dropwizardVersion}"
 }
 
-task run << {
-    javaexec {
-        main = "-jar"
-        args = ["${buildDir}/${appBaseName}.jar", 'server', config ]
-    }
-}
-
 apply from: 'gradle/shadow.gradle'
 // optional gradle helper files, remove these if you don't need them.
 apply from: 'gradle/pact.gradle'
