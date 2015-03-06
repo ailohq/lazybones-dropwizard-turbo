@@ -6,13 +6,15 @@ props.packageName = ask("Define 'package' in lowercase [com.example]: ", "com.ex
 props.applicationName = ask("Define 'application' name in camel case: [PetStore]", "PetStore", "applicationName").capitalize()
 props.applicationDashName = props.applicationName.replaceAll(/\B[A-Z]/) { '-' + it }.toLowerCase()
 
-props.domainName = ask("Define 'domain' name in camel case [Dog]:", "Dog", "applicationName").capitalize()
+props.domainName = ask("Define 'domain' object name in camel case [Dog]:", "Dog", "applicationName").capitalize()
 props.domainSnakeName=props.domainName.replaceAll( /([A-Z])/, /_$1/ ).toLowerCase().replaceAll( /^_/, '' )
 props.domainLowercaseName=props.domainName.toLowerCase()
+props.domainUppercaseName=props.domainName.toUpperCase()
 
 processTemplates "gradle.properties", props
 processTemplates "Dockerfile", props
 processTemplates "src/main/java/packageName/**/*.java", props
+processTemplates "src/main/resources/**/*.xml", props
 processTemplates "src/test/java/packageName/**/*.java", props
 
 // new package structure

@@ -45,7 +45,7 @@ public class ${domainName}ResourceTest extends JsonFixtureTest {
     public void create${domainName} () {
 
         // when
-        resources.client().target("/${domainLowercaseName}/").request().post(Entity.json(${domainSnakeName}));
+        resources.client().target("/${domainLowercaseName}").request().post(Entity.json(${domainSnakeName}));
 
         // then
         verify(${domainSnakeName}DAO).create(any(${domainName}.class));
@@ -69,8 +69,8 @@ public class ${domainName}ResourceTest extends JsonFixtureTest {
     public void getAll${domainName} () {
 
         // when
-        Response response = resources.client().target("/${domainLowercaseName}/").request().get();
-        List<${domainName}> result = resources.client().target("/${domainLowercaseName}/").request().get(List.class);
+        Response response = resources.client().target("/${domainLowercaseName}").request().get();
+        List<${domainName}> result = resources.client().target("/${domainLowercaseName}").request().get(List.class);
 
         // then
         assertThat(response.getStatus()).isEqualTo(OK.getStatusCode());

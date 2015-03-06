@@ -51,7 +51,8 @@ task run << {
     }
 }
 
-apply from: 'gradle/pact.gradle'
 apply from: 'gradle/shadow.gradle'
+// optional gradle helper files, remove these if you don't need them.
+apply from: 'gradle/pact.gradle'
 apply from: 'gradle/migrations.gradle'
 apply from: 'gradle/bintray.gradle'

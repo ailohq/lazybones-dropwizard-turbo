@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-@Path("/${domainLowercaseName}/")
+@Path("/${domainLowercaseName}")
 @Produces(MediaType.APPLICATION_JSON)
 public class ${domainName}Resource {
 
@@ -45,7 +45,7 @@ public class ${domainName}Resource {
     }
 
     @GET
-    @Path("{id}")
+    @Path("/{id}")
     @Timed
     @UnitOfWork
     @CacheControl(maxAge = 1, maxAgeUnit = TimeUnit.DAYS)
