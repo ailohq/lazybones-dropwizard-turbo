@@ -1,6 +1,6 @@
 package ${packageName}.resources;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.Before;
 import org.junit.ClassRule;
@@ -22,6 +22,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
+import io.dropwizard.java8.jersey.OptionalMessageBodyWriter;
+import io.dropwizard.java8.jersey.OptionalParamFeature;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ${domainName}ResourceTest extends JsonFixtureTest {
@@ -32,6 +34,8 @@ public class ${domainName}ResourceTest extends JsonFixtureTest {
     @ClassRule
     public static ResourceTestRule resources = ResourceTestRule.builder()
             .addResource(new ${domainName}Resource(${domainSnakeName}DAO))
+            .addProvider(OptionalMessageBodyWriter.class)
+            .addProvider(OptionalParamFeature.class)
             .build();
 
     @Before

@@ -15,6 +15,7 @@ import de.thomaskrille.dropwizard_template_config.TemplateConfigBundle;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
+import io.dropwizard.java8.Java8Bundle;
 import io.dropwizard.hibernate.ScanningHibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -28,7 +29,7 @@ public class ${applicationName} extends Application<${applicationName}Configurat
 
     @Override
     public void initialize(final Bootstrap<${applicationName}Configuration> bootstrap) {
-
+        bootstrap.addBundle(new Java8Bundle());
         bootstrap.addBundle(new TemplateConfigBundle());
         bootstrap.addBundle(migrationsBundle);
         bootstrap.addBundle(hibernateBundle);

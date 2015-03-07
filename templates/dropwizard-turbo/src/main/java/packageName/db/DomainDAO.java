@@ -1,6 +1,6 @@
 package ${packageName}.db;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 import ${packageName}.model.${domainName};
@@ -24,6 +24,6 @@ public class ${domainName}DAO extends AbstractDAO<${domainName}> {
     }
 
     public Optional<${domainName}> readById(Integer id) {
-        return Optional.fromNullable(get(id));
+        return Optional.ofNullable(get(id));
     }
 }

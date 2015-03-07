@@ -15,7 +15,7 @@ This template is a lot more comprehensive and is tailored towards the following 
  * dependency injection - use Guice auto config to avoid boilerplate code.
  * containerised deployment - Docker or Heroku containers: single port and ENV variables available during runtime only
  * continuous delivery - application version is not hardcoded but passed in at build time via gradle property: `-Papp_version`
- * Java8 - uses lambdas and Java8 module will be added in the future
+ * Java8 - lambdas, Optional and LocalDate.
 
 ## Usage
 Install lazybones using [gvm](http://gvmtool.net/)
@@ -49,7 +49,8 @@ Most of the following dependencies are optional. Mix and match as you see fit.
  * [Dropwizard Hibernate](http://dropwizard.github.io/dropwizard/manual/hibernate.html) - database ORM
  * [Dropwizard Migrations](http://dropwizard.github.io/dropwizard/manual/migrations.html) - liquibase migration. Also see `gradle/migrations.gradle`
  * [Dropwizard Jersey Client]() - to connect with other REST API endpoints.
- * [Dropwizard Authentication](http://dropwizard.github.io/dropwizard/manual/auth.html) - support Basic and OAuth authentication
+ * [Dropwizard Java8](https://dropwizard.github.io/dropwizard-java8/)
+ * [Dropwizard Java8 Authentication](https://dropwizard.github.io/dropwizard-java8/0.8.0-1/dropwizard-java8-auth/index.html)
 
 ### Thrid Party Modules:
 

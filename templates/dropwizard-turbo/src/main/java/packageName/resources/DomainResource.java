@@ -11,7 +11,7 @@ import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.jersey.caching.CacheControl;
 import ${packageName}.db.${domainName}DAO;
 import ${packageName}.model.${domainName};
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.validation.Valid;

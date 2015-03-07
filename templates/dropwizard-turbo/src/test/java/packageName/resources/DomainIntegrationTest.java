@@ -35,13 +35,13 @@ public class ${domainName}IntegrationTest extends IntegrationTest {
     public void getAll${domainName} () {
         // when
         List<${domainName}> ${domainSnakeName}List = client.target(
-        String.format("http://localhost:%d/${domainLowercaseName}", RULE.getLocalPort()))
-        .request()
-        .get(List.class);
+                String.format("http://localhost:%d/${domainLowercaseName}", RULE.getLocalPort()))
+                .request()
+                .get(List.class);
 
         // then
         assertThat(${domainSnakeName}List).hasSize(1);
-        }
+    }
 
     @Test
     public void get${domainName}ById () {
@@ -50,9 +50,9 @@ public class ${domainName}IntegrationTest extends IntegrationTest {
 
         // when
         ${domainName} ${domainName}Result = client.target(
-        String.format("http://localhost:%d/${domainLowercaseName}/1", RULE.getLocalPort()))
-        .request()
-        .get(${domainName}.class);
+                String.format("http://localhost:%d/${domainLowercaseName}/1", RULE.getLocalPort()))
+                .request()
+                .get(${domainName}.class);
 
         // then
         assertThat(${domainName}Result).isEqualToIgnoringGivenFields(${domainSnakeName}, "id");

@@ -21,10 +21,11 @@ repositories {
 
 dependencies {
     compile "io.dropwizard:dropwizard-core:${dropwizardVersion}"
-    compile "io.dropwizard:dropwizard-auth:${dropwizardVersion}"
     compile "io.dropwizard:dropwizard-client:${dropwizardVersion}"
     compile "io.dropwizard:dropwizard-hibernate:${dropwizardVersion}"
     compile "io.dropwizard:dropwizard-migrations:${dropwizardVersion}"
+    compile "io.dropwizard.modules:dropwizard-java8:${dropwizardJava8Version}"
+    compile "io.dropwizard.modules:dropwizard-java8-auth:${dropwizardJava8Version}"
 
     compile "de.thomaskrille:dropwizard-template-config:${templateConfigVersion}"
     compile "com.hubspot.dropwizard:dropwizard-guice:${dropwizardGuiceVersion}"
