@@ -81,4 +81,27 @@ FileUtils.moveFile(absIntegrationTestFile, new File("${targetTestDirectory}/Inte
 
 FileUtils.deleteDirectory(new File(existingTestDirectory))
 
+// Git Ignore
+def gitIgnoreString = "# ignore build\n" +
+        ".gradle\n" +
+        "logs\n" +
+        "build\n" +
+        "\n" +
+        "#ignore intellij\n" +
+        "atlassian-ide-plugin.xml\n" +
+        ".idea/\n" +
+        "*.iml\n" +
+        "*.ipr\n" +
+        "*.iws\n" +
+        "\n" +
+        "#ignore misc\n" +
+        ".ruby-version\n" +
+        ".wgetrc\n" +
+        "contract.zip\n" +
+        "contract\n" +
+        "newrelic/*.jar\n" +
+        "newrelic/logs\n" +
+        "scripts"
 
+def gitIgnoreFile = new File ("${targetDir}/.gitignore");
+FileUtils.write(gitIgnoreFile, gitIgnoreString);

@@ -37,22 +37,44 @@ To upload your fatjar into bintray, update `gradle/bintray.gradle` file with you
 
 Also update `~/.gradle/gradle.properties` with your `bintrayUserName` and `bintrayApiKey`
 
-Then run:
-
-        gradle bintrayUpload
-
-## Running The Application
+## Usage
 To test the example application run the following commands.
 
-* To run the tests run
+* Create a IntelliJ project:
 
-        gradle test
+        ./gradlew idea
 
-* To package the example run.
+* Run the tests:
 
-        gradle shadowJar
+        ./gradlew test
 
+* Package the application and run it (see `gradle/shadow.gradle`):
 
-* To run the application run.
+        ./gradlew shadowJar
+        ./gradlew run
 
-        gradle run
+* Upload package to bintray (see `gradle/bintray.gradle`):
+
+        ./gradlew bintrayUpload
+
+* Run DB Migrations (see `gradle/migrations.gradle`):
+
+        ./gradlew dbDropAll
+        ./gradlew dbMigrate
+        ./gradlew dbTag
+
+* Run Pact tests (see `gradle/pact.gradle`);
+
+        ./gradlew pactVerify
+
+## Usage
+Use either a browser or a REST client such as [PostMan](https://chrome.google.com/webstore/detail/postman-rest-client-packa/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
+
+* You RESTful APIs are available here:
+
+    http://localhost:8080/*
+    http://localhost:8080/admin
+
+* [Swagger](http://swagger.io/) API are here:
+
+    http://localhost:8080/api/api-docs
