@@ -36,6 +36,7 @@ dependencies {
     }
 
     compile "com.h2database:h2:${h2Version}"
+    compile "org.postgresql:postgresql:${pgVersion}"
     compile "com.newrelic.agent.java:newrelic-api:${newrelicVersion}"
     compile("com.wordnik:swagger-jersey2-jaxrs_2.11:${swaggerVersion}") {
         exclude group: 'org.glassfish.jersey.containers', module: 'jersey-container-servlet-core'
