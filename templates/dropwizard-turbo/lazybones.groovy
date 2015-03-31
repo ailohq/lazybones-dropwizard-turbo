@@ -3,10 +3,10 @@ import org.apache.commons.io.FileUtils
 def props = [:]
 props.packageName = ask("Define 'package' in lowercase [com.example]: ", "com.example", "group")
 
-props.applicationName = ask("Define 'application' name in camel case: [PetStore]", "PetStore", "applicationName").capitalize()
+props.applicationName = ask("Define 'application' name in camel case [PetStore]: ", "PetStore", "applicationName").capitalize()
 props.applicationDashName = props.applicationName.replaceAll(/\B[A-Z]/) { '-' + it }.toLowerCase()
 
-props.domainName = ask("Define 'domain' object name in camel case [Dog]:", "Dog", "applicationName").capitalize()
+props.domainName = ask("Define 'domain' object name in camel case [Dog]: ", "Dog", "applicationName").capitalize()
 props.domainSnakeName=props.domainName.replaceAll( /([A-Z])/, /_$1/ ).toLowerCase().replaceAll( /^_/, '' )
 props.domainLowercaseName=props.domainName.toLowerCase()
 props.domainUppercaseName=props.domainName.toUpperCase()
@@ -56,7 +56,7 @@ def moduleFile = new File("${existingSrcDirectory}/ApplicationModule.java")
 FileUtils.moveFile(moduleFile, new File("${targetSrcDirectory}/${props.applicationName}Module.java"))
 
 def appFile = new File("${existingSrcDirectory}/Application.java")
-FileUtils.moveFile(appFile, new File("${targetSrcDirectory}/${props.applicationName}.java"))
+FileUtils.moveFile(appFile, new File("${targetSrcDirectory}/${props.applicationName}Application.java"))
 
 def configurationFile = new File("${existingSrcDirectory}/ApplicationConfiguration.java")
 FileUtils.moveFile(configurationFile, new File("${targetSrcDirectory}/${props.applicationName}Configuration.java"))

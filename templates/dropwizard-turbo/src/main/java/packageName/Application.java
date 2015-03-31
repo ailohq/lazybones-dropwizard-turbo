@@ -1,7 +1,7 @@
 package ${packageName};
 
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.hubspot.dropwizard.guice.GuiceBundle;
-import com.netflix.governator.guice.LifecycleInjector;
 import com.wordnik.swagger.config.ConfigFactory;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.jaxrs.config.DefaultJaxrsScanner;
@@ -21,19 +21,21 @@ import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-public class ${applicationName} extends Application<${applicationName}Configuration> {
+public class ${applicationName}Application extends Application<${applicationName}Configuration> {
 
     public static void main(String[] args) throws Exception {
-        new ${applicationName}().run(args);
+        new ${applicationName}Application().run(args);
     }
 
     @Override
     public void initialize(final Bootstrap<${applicationName}Configuration> bootstrap) {
+        final ${applicationName}Module guiceModule = new ${applicationName}Module();
         bootstrap.addBundle(new Java8Bundle());
         bootstrap.addBundle(new TemplateConfigBundle());
-        bootstrap.addBundle(migrationsBundle);
-        bootstrap.addBundle(hibernateBundle);
-        bootstrap.addBundle(guiceGovernatorBundle);
+        bootstrap.addBundle(guiceModule.getMigrationBundle());
+        bootstrap.addBundle(guiceModule.getHibernateBundle());
+        bootstrap.addBundle(guiceModule.getGuiceBundle());
+        bootstrap.getObjectMapper().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
 
     @Override
@@ -60,36 +62,5 @@ public class ${applicationName} extends Application<${applicationName}Configurat
         ConfigFactory.config().setApiInfo(apiInfo);
     }
 
-    final MigrationsBundle<${applicationName}Configuration> migrationsBundle =
-            new MigrationsBundle<${applicationName}Configuration>() {
-                @Override
-                public DataSourceFactory getDataSourceFactory(${applicationName}Configuration configuration) {
-                    return configuration.getDataSource();
-                }
-            };
-
-    final HibernateBundle<${applicationName}Configuration> hibernateBundle =
-            new ScanningHibernateBundle<${applicationName}Configuration>("${packageName}.model") {
-                @Override
-                public DataSourceFactory getDataSourceFactory(${applicationName}Configuration configuration) {
-                    return configuration.getDataSource();
-                }
-            };
-
-    final GuiceBundle<${applicationName}Configuration> guiceGovernatorBundle = GuiceBundle.<${applicationName}Configuration>newBuilder()
-            .addModule(new ${applicationName}Module(hibernateBundle))
-            .enableAutoConfig(
-                    "${packageName}.resources",
-                    "${packageName}.health",
-                    "${packageName}.jersey",
-                    "trunk.dropwizard.newrelic"
-            )
-            .setConfigClass(${applicationName}Configuration.class)
-            .setInjectorFactory((stage, modules) -> LifecycleInjector.builder()
-                    .inStage(stage)
-                    .withModules(modules)
-                    .build()
-                    .createInjector())
-            .build();
 
 }

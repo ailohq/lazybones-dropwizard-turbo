@@ -8,13 +8,6 @@ jar {
     }
 }
 
-task shadowRun (dependsOn: 'shadowJar') << {
-    javaexec {
-        main = "-jar"
-        args = ["${buildDir}/${appBaseName}.jar", 'server', config ]
-    }
-}
-
 shadowJar {
     baseName appBaseName
     archiveName "${appBaseName}.jar"
@@ -24,6 +17,13 @@ shadowJar {
     exclude 'META-INF/*.SF'
     exclude 'META-INF/*.DSA'
     exclude 'META-INF/*.RSA'
+}
+
+task shadowRun (dependsOn: 'shadowJar') << {
+    javaexec {
+        main = "-jar"
+        args = ["${buildDir}/${appBaseName}.jar", 'server', config ]
+    }
 }
 
 publishing {

@@ -68,7 +68,7 @@ To test the example application run the following commands.
         ./gradlew pactVerify
 
 ## Usage
-Use either a browser or a REST client such as [PostMan](https://chrome.google.com/webstore/detail/postman-rest-client-packa/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
+Use either a browser or a REST client such as [PostMan](https://www.getpostman.com)
 
 * You RESTful APIs are available here:
 
