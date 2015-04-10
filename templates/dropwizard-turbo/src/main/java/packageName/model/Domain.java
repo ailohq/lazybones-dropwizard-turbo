@@ -2,13 +2,9 @@ package ${packageName}.model;
 
 import javax.validation.constraints.NotNull;
 import com.wordnik.swagger.annotations.ApiModel;
-import com.wordnik.swagger.annotations.ApiModelProperty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "${domainSnakeName}")
@@ -17,12 +13,22 @@ public class ${domainName} {
 
     @Id
     @JsonProperty
-    @NotNull
-    @ApiModelProperty(required=true)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column
+    @NotNull
     @JsonProperty
     private String message;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }

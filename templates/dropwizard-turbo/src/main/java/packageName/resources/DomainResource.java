@@ -22,7 +22,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-
+import static javax.ws.rs.core.Response.*;
+import static javax.ws.rs.core.Response.Status.*;
 
 @Path("/${domainLowercaseName}")
 @Api(value = "/${domainLowercaseName}", description = "Operation on ${domainName}")
@@ -40,10 +41,11 @@ public class ${domainName}Resource {
     @Timed
     @UnitOfWork
     @Consumes(APPLICATION_JSON)
-    @ApiOperation(value = "Create ${domainName}")
+    @ApiOperation(value = "Create ${domainName}", response = ${domainName}.class)
     @ApiResponses(value = {@ApiResponse(code = 422, message = "${domainName} already exists")})
-    public void create${domainName}(@Valid ${domainName} ${domainSnakeName}) {
-        ${domainSnakeName}DAO.create(${domainSnakeName});
+    public Response create${domainName}(@Valid ${domainName} ${domainSnakeName}) {
+        ${domainName} created = ${domainSnakeName}DAO.create(${domainSnakeName});
+        return status(CREATED).entity(created).build();
     }
 
     @GET
@@ -62,7 +64,7 @@ public class ${domainName}Resource {
     @CacheControl(maxAge = 1, maxAgeUnit = TimeUnit.DAYS)
     @ApiOperation(value = "Get ${domainName} by Id", response = ${domainName}.class)
     @ApiResponses(value = {@ApiResponse(code = 404, message = "${domainName} not found")})
-    public Optional<${domainName}> get${domainName}ById(@ApiParam(required = true) @PathParam("id") final Integer id ) {
+    public Optional<${domainName}> get${domainName}ById(@ApiParam(required = true) @PathParam("id") final Long id ) {
         return ${domainSnakeName}DAO.readById(id);
     }
 

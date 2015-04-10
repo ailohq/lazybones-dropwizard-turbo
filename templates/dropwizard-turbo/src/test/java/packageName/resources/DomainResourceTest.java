@@ -16,12 +16,11 @@ import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.List;
 
-import static javax.ws.rs.core.Response.Status.OK;
+import static javax.ws.rs.core.Response.Status.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import io.dropwizard.java8.jersey.OptionalMessageBodyWriter;
 import io.dropwizard.java8.jersey.OptionalParamFeature;
 
@@ -29,7 +28,6 @@ import io.dropwizard.java8.jersey.OptionalParamFeature;
 public class ${domainName}ResourceTest extends JsonFixtureTest {
 
     private final static ${domainName}DAO ${domainSnakeName}DAO = mock(${domainName}DAO.class);
-    private final ${domainName} ${domainSnakeName} = readFromJson("fixtures/${domainSnakeName}.json", ${domainName}.class);
 
     @ClassRule
     public static ResourceTestRule resources = ResourceTestRule.builder()
@@ -40,37 +38,48 @@ public class ${domainName}ResourceTest extends JsonFixtureTest {
 
     @Before
     public void setUp () {
-        // given
-        when(${domainSnakeName}DAO.readById(1)).thenReturn(Optional.of(${domainSnakeName}));
-        when(${domainSnakeName}DAO.readAll()).thenReturn(Arrays.<${domainName}>asList(${domainSnakeName}));
     }
 
     @Test
     public void create${domainName} () {
+        // given
+        when(${domainSnakeName}DAO.create(any(${domainName}.class))).thenReturn(given${domainName}WithId(1L));
 
         // when
-        resources.client().target("/${domainLowercaseName}").request().post(Entity.json(${domainSnakeName}));
+        Response response = resources.client().target("/${domainLowercaseName}").request().post(Entity.json(given${domainName}WithId(null)));
 
         // then
-        verify(${domainSnakeName}DAO).create(any(${domainName}.class));
+        assertThat(response.getStatus()).isEqualTo(CREATED.getStatusCode());
+
+        ${domainName} ${domainSnakeName} = response.readEntity(${domainName}.class);
+        assertThat(${domainSnakeName}.getId()).isNotNull();
+        assertThat(${domainSnakeName}).isEqualToComparingFieldByField(given${domainName}WithId(1L));
     }
 
 
     @Test
     public void get${domainName}ById () {
+        // given
+        when(${domainSnakeName}DAO.readById(1L)).thenReturn(Optional.of(given${domainName}WithId(1L)));
 
         // when
         Response response = resources.client().target("/${domainLowercaseName}/1").request().get();
-        ${domainName} result = resources.client().target("/${domainLowercaseName}/1").request().get(${domainName}.class);
 
         // then
         assertThat(response.getStatus()).isEqualTo(OK.getStatusCode());
-        assertThat(result).isEqualToComparingFieldByField(${domainSnakeName});
+
+        ${domainName} ${domainSnakeName} = response.readEntity(${domainName}.class);
+        assertThat(${domainSnakeName}).isEqualToComparingFieldByField(given${domainName}WithId(1L));
     }
 
 
     @Test
     public void getAll${domainName} () {
+        // given
+        when(${domainSnakeName}DAO.readAll()).thenReturn(Arrays.<${domainName}>asList(
+            given${domainName}WithId(1L),
+            given${domainName}WithId(2L)
+        ));
 
         // when
         Response response = resources.client().target("/${domainLowercaseName}").request().get();
@@ -78,7 +87,6 @@ public class ${domainName}ResourceTest extends JsonFixtureTest {
 
         // then
         assertThat(response.getStatus()).isEqualTo(OK.getStatusCode());
-        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.size()).isEqualTo(2);
     }
-
 }

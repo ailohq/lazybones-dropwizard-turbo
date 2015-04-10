@@ -10,7 +10,7 @@ ADD newrelic/newrelic.yml /app/newrelic/newrelic.yml
 
 # dropwizard
 ADD ${applicationDashName}.yml /app/
-ADD ${applicationDashName}.jar /app/
+ADD build/${applicationDashName}.jar /app/
 
 # run
 EXPOSE 8080

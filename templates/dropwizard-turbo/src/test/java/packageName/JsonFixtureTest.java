@@ -1,5 +1,6 @@
 package ${packageName};
 
+import com.example.model.${domainName};
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.dropwizard.jackson.Jackson;
 
@@ -17,5 +18,11 @@ public abstract class JsonFixtureTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    protected ${domainName} given${domainName}WithId(final Long id) {
+        final ${domainName} ${domainSnakeName} = readFromJson("fixtures/${domainSnakeName}.json", ${domainName}.class);
+        ${domainSnakeName}.setId(id);
+        return ${domainSnakeName};
     }
 }

@@ -15,15 +15,15 @@ public class ${domainName}DAO extends AbstractDAO<${domainName}> {
         super(sessionFactory);
     }
 
-    public void create(${domainName} ${domainSnakeName}) {
-        currentSession().persist(${domainSnakeName});
+    public ${domainName} create(${domainName} ${domainSnakeName}) {
+        return persist(${domainSnakeName});
     }
 
     public List<${domainName}> readAll() {
         return list(currentSession().createCriteria(${domainName}.class));
     }
 
-    public Optional<${domainName}> readById(Integer id) {
+    public Optional<${domainName}> readById(Long id) {
         return Optional.ofNullable(get(id));
     }
 }

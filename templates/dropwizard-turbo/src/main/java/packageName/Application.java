@@ -1,7 +1,6 @@
 package ${packageName};
 
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.hubspot.dropwizard.guice.GuiceBundle;
 import com.wordnik.swagger.config.ConfigFactory;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.jaxrs.config.DefaultJaxrsScanner;
@@ -13,11 +12,7 @@ import com.wordnik.swagger.model.ApiInfo;
 import com.wordnik.swagger.reader.ClassReaders;
 import de.thomaskrille.dropwizard_template_config.TemplateConfigBundle;
 import io.dropwizard.Application;
-import io.dropwizard.db.DataSourceFactory;
-import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.java8.Java8Bundle;
-import io.dropwizard.hibernate.ScanningHibernateBundle;
-import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
