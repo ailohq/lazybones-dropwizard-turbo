@@ -2,7 +2,7 @@
 
 [ ![Download](https://api.bintray.com/packages/trunkplatform/lazybones/dropwizard-turbo-template/images/download.svg) ](https://bintray.com/trunkplatform/lazybones/dropwizard-turbo-template/_latestVersion)
 
-Turbo charge your [Dropwizard](dropwizard.io) 0.8.0 Microservice using this lazybones template, inspired by KyleBoon's
+Turbo charge your [Dropwizard](dropwizard.io) 0.8.X Microservice using this lazybones template, inspired by KyleBoon's
 [Lazybones Template for Dropwizard 0.7.0](https://github.com/kyleboon/lazybones-dropwizard-template)
 
 For more instructions on lazybones( Project Creation tool) and how to build this project refer to:
