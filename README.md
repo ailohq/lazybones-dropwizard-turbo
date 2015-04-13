@@ -34,6 +34,10 @@ Update lazybones config to point to trunkplatform lazybones repository:
     lazybones config set bintrayRepositories "pledbrook/lazybones-templates", "trunkplatform/lazybones"
 
 ### Create new Project
+To list available template versions use:
+
+    lazybones info dropwizard-turbo
+
 Make sure you are using lazybones 0.8+
 
     lazybones create dropwizard-turbo {version} destination
