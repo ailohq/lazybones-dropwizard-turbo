@@ -30,6 +30,7 @@ Install lazybones using [gvm](http://gvmtool.net/)
 
 Update lazybones config to point to trunkplatform lazybones repository:
 
+    mkdir ~/.lazybones
     lazybones config set bintrayRepositories "pledbrook/lazybones-templates", "trunkplatform/lazybones"
 
 ### Create new Project
