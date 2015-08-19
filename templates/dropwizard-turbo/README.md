@@ -51,7 +51,7 @@ To test the example application run the following commands.
 * Package the application and run it (see `gradle/shadow.gradle`):
 
         ./gradlew shadowJar
-        ./gradlew shadowJar
+        ./gradlew shadowRun
 
 * Upload package to bintray (see `gradle/bintray.gradle`):
 
